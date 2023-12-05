@@ -41,7 +41,8 @@ def view_smallurl(request, hash):
     except ShortenedLink.DoesNotExist:
         raise Http404("ShortenedLink does not exist")
 
-    ip_address = request.META.get('HTTP_X_FORWARDED_FOR') or request.META.get('REMOTE_ADDR')
+    # ip_address = request.META.get('HTTP_X_FORWARDED_FOR') or request.META.get('REMOTE_ADDR')
+    ip_address = request.META.get('REMOTE_ADDR')
 
     # Log access information
     AccessLog.objects.create(link=shortened_link, ip_address=ip_address)
