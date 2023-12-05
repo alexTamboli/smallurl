@@ -15,7 +15,7 @@ def index(request):
         form = LinkForm(request.POST)
         if form.is_valid():
             original_link = form.cleaned_data['youtube_link']
-            encryption_key = form.cleaned_data['encryption_key']
+            # encryption_key = form.cleaned_data['encryption_key']
             
             # Perform encryption here if encryption_key is provided
             
@@ -58,11 +58,12 @@ def view_smallurl(request, hash):
 
 
 def view_links(request):
+    base_url = request.build_absolute_uri('/')[:-1]
     links = ShortenedLink.objects.all().order_by('-created_at')[:5]
     youtube_video_ids = [extract_video_id(link.original_link) for link in links]
     links_with_video_ids = zip(links, youtube_video_ids)
 
-    context = {'links_with_video_ids': links_with_video_ids}
+    context = {'links_with_video_ids': links_with_video_ids, 'base_url': base_url}
     return render(request, 'smallurl/view_links.html', context=context)
 
 

@@ -1,29 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>View Recently Pasted Links</title>
-</head>
-<body>
-    <h1>Recently Pasted Links</h1>
-    <p> Upto 5 </p>
-    
+{% extends 'smallurl/base.html' %}
+
+{% block content %}
+<body class="container mt-5">
+    <div class="row justify-content-between mb-4">
+        <div class="col-md-6">
+            <h1>Recently Pasted Links</h1>
+            <p>Up to 5</p>
+        </div>
+        <div class="col-md-6 text-right">
+            <a href="{% url 'index' %}" class="btn btn-primary">Submit Another Link</a>
+        </div>
+    </div>
+
     {% for link, youtube_video_id in links_with_video_ids %}
-        <p> {{ link.short_url_hash }} </p>
+        <div class="mb-4">
+            <p class="font-weight-bold">{{ forloop.counter }}. <a href="{{base_url}}/{{ link.short_url_hash }}" target="_blank">{{base_url}}/{{ link.short_url_hash }}</a></p>
 
-        <!-- Embed the YouTube video using the extracted video ID -->
-        {% if youtube_video_id %}
-            <iframe width="640" height="360" src="https://www.youtube.com/embed/{{ youtube_video_id }}" frameborder="0" allowfullscreen></iframe>
-        {% else %}
-            <p>Invalid YouTube video URL</p>
-        {% endif %}
-        
-        <!-- Add a line break between entries -->
-        <br>
-
+            <!-- Embed the YouTube video using the extracted video ID -->
+            {% if youtube_video_id %}
+                <div class="embed-responsive embed-responsive-16by9">
+                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{ youtube_video_id }}" allowfullscreen></iframe>
+                </div>
+            {% else %}
+                <p class="text-danger">Invalid YouTube video URL</p>
+            {% endif %}
+        </div>
     {% endfor %}
-    
-    <a href="{% url 'index' %}">Submit Another Link</a>
-</body>
-</html>
+
+{% endblock %}
