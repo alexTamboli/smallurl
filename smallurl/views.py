@@ -7,7 +7,7 @@ from ipware import get_client_ip
 from .forms import LinkForm
 from .models import ShortenedLink, AccessLog
 from .shortener import Shortener
-from .utils import extract_video_id, get_client_ip_address
+from .utils import extract_video_id
 
 
 def index(request):
