@@ -58,8 +58,12 @@ def view_smallurl(request, hash):
 
 
 def view_links(request):
-    links = ShortenedLink.objects.all().order_by('-created_at')
-    return render(request, 'smallurl/view_links.html', {'links': links})
+    links = ShortenedLink.objects.all().order_by('-created_at')[:5]
+    youtube_video_ids = [extract_video_id(link.original_link) for link in links]
+    links_with_video_ids = zip(links, youtube_video_ids)
+
+    context = {'links_with_video_ids': links_with_video_ids}
+    return render(request, 'smallurl/view_links.html', context=context)
 
 
 def access_logs(request):

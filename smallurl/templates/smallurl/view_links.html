@@ -7,10 +7,21 @@
 </head>
 <body>
     <h1>Recently Pasted Links</h1>
+    <p> Upto 5 </p>
     
-    {% for link in links %}
-        <p> {{link.short_url_hash}} </p>
-        {% comment %} <p><a href="{% url 'play_video' short_url=link.short_url_hash %}" target="_blank">{{ link.original_link }}</a></p> {% endcomment %}
+    {% for link, youtube_video_id in links_with_video_ids %}
+        <p> {{ link.short_url_hash }} </p>
+
+        <!-- Embed the YouTube video using the extracted video ID -->
+        {% if youtube_video_id %}
+            <iframe width="640" height="360" src="https://www.youtube.com/embed/{{ youtube_video_id }}" frameborder="0" allowfullscreen></iframe>
+        {% else %}
+            <p>Invalid YouTube video URL</p>
+        {% endif %}
+        
+        <!-- Add a line break between entries -->
+        <br>
+
     {% endfor %}
     
     <a href="{% url 'index' %}">Submit Another Link</a>
