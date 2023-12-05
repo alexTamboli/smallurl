@@ -45,18 +45,10 @@ def view_smallurl(request, hash):
     except ShortenedLink.DoesNotExist:
         raise Http404("ShortenedLink does not exist")
 
-    # ip_address = get_client_ip_address(request)
-    
     client_ip, is_routable = get_client_ip(request)
-    if client_ip is None:
-        # Unable to get the client's IP address
-        print("client ip not found")
-    else:
-        ip_address = client_ip
-    print(ip_address)
-    
+
     # Log access information
-    AccessLog.objects.create(link=shortened_link, ip_address=ip_address)
+    AccessLog.objects.create(link=shortened_link, ip_address=client_ip)
 
     short_url = request.build_absolute_uri(reverse('smallurl_view', args=[hash]))
     youtube_video_id = extract_video_id(shortened_link.original_link)
