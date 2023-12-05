@@ -1,10 +1,13 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.http import Http404
+
+from ipware import get_client_ip
+
 from .forms import LinkForm
 from .models import ShortenedLink, AccessLog
 from .shortener import Shortener
-from .utils import extract_video_id
+from .utils import extract_video_id, get_client_ip_address
 
 
 def index(request):
@@ -23,6 +26,7 @@ def index(request):
             # Check for collisions and regenerate token if needed
             while ShortenedLink.objects.filter(short_url_hash=short_url_token).exists():
                 short_url_token = shortener.issue_token()
+                # short_url_token = shortener.shorten_url(original_link)
 
             shortened_link = ShortenedLink.objects.create(
                                             original_link=original_link, 
@@ -41,8 +45,16 @@ def view_smallurl(request, hash):
     except ShortenedLink.DoesNotExist:
         raise Http404("ShortenedLink does not exist")
 
-    ip_address = request.META.get('REMOTE_ADDR')
-
+    # ip_address = get_client_ip_address(request)
+    
+    client_ip, is_routable = get_client_ip(request)
+    if client_ip is None:
+        # Unable to get the client's IP address
+        print("client ip not found")
+    else:
+        ip_address = client_ip
+    print(ip_address)
+    
     # Log access information
     AccessLog.objects.create(link=shortened_link, ip_address=ip_address)
 

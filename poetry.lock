@@ -38,6 +38,20 @@ argon2 = ["argon2-cffi (>=19.1.0)"]
 bcrypt = ["bcrypt"]
 
 [[package]]
+name = "django-ipware"
+version = "6.0.2"
+description = "A Django application to retrieve user's IP address"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "django-ipware-6.0.2.tar.gz", hash = "sha256:27bd87e44199e139c2bf8e6e1017b5fd56213e3feb6a531525e4a460c250ee9e"},
+    {file = "django_ipware-6.0.2-py2.py3-none-any.whl", hash = "sha256:33b7597fda57864478711cab14506b862d8fc7918a95632a4cba3277c22d3a24"},
+]
+
+[package.dependencies]
+python-ipware = ">=2.0.0"
+
+[[package]]
 name = "gunicorn"
 version = "21.2.0"
 description = "WSGI HTTP Server for UNIX"
@@ -183,6 +197,20 @@ files = [
 ]
 
 [[package]]
+name = "python-ipware"
+version = "2.0.0"
+description = "A Python package to retrieve user's IP address"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "python-ipware-2.0.0.tar.gz", hash = "sha256:a52757123c718342f74b16ab2d9d4a531888d69d10b8197c073164635df0a13b"},
+    {file = "python_ipware-2.0.0-py3-none-any.whl", hash = "sha256:802858aa13308d572876d1883edae0eae380fe70a51fdefcb46c8a2099240862"},
+]
+
+[package.extras]
+dev = ["coverage[toml]", "coveralls (>=3.3,<4.0)", "ruff", "twine"]
+
+[[package]]
 name = "sqlparse"
 version = "0.4.4"
 description = "A non-validating SQL parser."
@@ -237,4 +265,4 @@ brotli = ["Brotli"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "6124be23ca6c1dd0c693c6e4caa079363c1d1d52f493402148ea9a7064c571ca"
+content-hash = "4276d6292f3e9c40977513bed231cbf72901eb3450eccbf2f464501b37618256"
