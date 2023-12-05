@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Recently Pasted Links</title>
+</head>
+<body>
+    <h1>Recently Pasted Links</h1>
+    
+    {% for link in links %}
+        <p> {{link.short_url_hash}} </p>
+        {% comment %} <p><a href="{% url 'play_video' short_url=link.short_url_hash %}" target="_blank">{{ link.original_link }}</a></p> {% endcomment %}
+    {% endfor %}
+    
+    <a href="{% url 'index' %}">Submit Another Link</a>
+</body>
+</html>
