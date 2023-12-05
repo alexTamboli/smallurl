@@ -1,7 +1,7 @@
 from .base import *
 
 DEBUG = False
-ALLOWED_HOSTS = ['127.0.0.1', 'smallurl-server.onrender.com']
+ALLOWED_HOSTS = ['smallurl-server.onrender.com']
 
 # INSTALLED_APPS += [
 #     'cloudinary_storage',
