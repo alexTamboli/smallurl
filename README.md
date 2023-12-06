@@ -61,10 +61,6 @@ $ python manage.py runserver
 
 8. Open a browser and go to http://localhost:8000/.
 
-## More Info
-
-- Implemention of Encryption on generated urls is not done.
-- Authentication is not implmeneted in this project.
 
 ## License
 
