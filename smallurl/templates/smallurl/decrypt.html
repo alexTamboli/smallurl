@@ -1,0 +1,30 @@
+{% extends 'smallurl/base.html' %}
+
+{% block content %}
+<body class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title text-center">Decrypt to get the short URL</h2>
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-danger" role="alert">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="submit" class="btn btn-primary btn-block">Go To URL</button>
+                    </form>
+                    </br>
+                    <a href="{% url 'index' %}" class="btn btn-primary btn-block">Back to Home</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+{% endblock %}
+

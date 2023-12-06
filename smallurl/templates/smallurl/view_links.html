@@ -14,7 +14,7 @@
 
     {% for link, youtube_video_id in links_with_video_ids %}
         <div class="mb-4">
-            <p class="font-weight-bold">{{ forloop.counter }}. <a href="{{base_url}}/{{ link.short_url_hash }}" target="_blank">{{base_url}}/{{ link.short_url_hash }}</a></p>
+            <p class="font-weight-bold">{{ forloop.counter }}. <a href="{{ link.short_url }}" target="_blank">{{ link.short_url }}</a></p>
 
             <!-- Embed the YouTube video using the extracted video ID -->
             {% if youtube_video_id %}

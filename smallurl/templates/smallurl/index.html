@@ -5,15 +5,60 @@
     <div class="row justify-content-center">
         <div class="col-md-6">
             <h1 class="text-center">Small URL</h1>
-            <p class="text-center"> Make your youtube url shorter</p>
+            <p class="text-center"> Make your YouTube URL shorter</p>
+
             <form method="post" action="{% url 'index' %}" class="mb-4">
+                {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-danger" role="alert">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
                 {% csrf_token %}
                 {{ form.as_p }}
+                <p> Keep encryption key empty if not needed. </p>
+                <p> Keep encryption key stored, you can not access it later .</p>
+
+
+                <!-- Generate Key Button -->
+                <button type="button" id="generateKeyBtn" class="btn btn-secondary">Generate Key</button>
+
+                <!-- Generated Key Display -->
+                <div id="generatedKeyContainer" style="display: none;">
+                    <p id="generatedKey" class="mt-2"></p>
+                </div>
+                
+                <!-- Submit Button -->
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
-            
+            <hr>
             <a href="{% url 'view_links' %}" class="btn btn-secondary">View Recently Pasted Links</a>
+            <a href="{% url 'access_logs' %}" class="btn btn-secondary">Access logs</a>
+            </br>
+            </br>
+            <a href="{% url 'decrypt-view' %}" class="btn btn-secondary">Decrypt your short URL</a>
         </div>
     </div>
-{% endblock %}
 
+    <script>
+        // JavaScript to generate a Fernet-compatible key
+        document.getElementById("generateKeyBtn").addEventListener("click", function() {
+            // Generate a random key
+            var key = Array.from(crypto.getRandomValues(new Uint8Array(32))).map(b => String.fromCharCode(b)).join('');
+            
+            // Convert the key to base64
+            var base64Key = btoa(key);
+
+            // Set the generated key in the input field
+            document.getElementById("id_encryption_key").value = base64Key;
+
+            // Display the generated key container
+            document.getElementById("generatedKeyContainer").style.display = "block";
+
+            // Display the generated key
+            document.getElementById("generatedKey").textContent = "Generated Key: " + base64Key;
+        });
+    </script>
+</body>
+{% endblock %}

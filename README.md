@@ -17,6 +17,8 @@ You can find the application **[here](https://smallurl-server.onrender.com)**
 
 4. **Access Logs Page**: The application provides a page to track when a link was accessed, sorted by time and accompanied by IP addresses.
 
+5. **Encrypt short url**: The application provides an option to encrypt url using a symmetric key. Here **Fernet** is used as an cryptography algorithm.
+
 
 ## Tech Stack used
 

@@ -1,4 +1,6 @@
 from urllib.parse import urlparse, parse_qs
+from cryptography.fernet import Fernet
+
 
 def extract_video_id(youtube_url):
     """
@@ -13,3 +15,15 @@ def extract_video_id(youtube_url):
         return url_data.path[1:]  # Remove leading '/'
     else:
         return None
+    
+
+def encrypt_link(original_link, encryption_key):
+    cipher_suite = Fernet(encryption_key)
+    encrypted_link = cipher_suite.encrypt(original_link.encode('utf-8'))
+    return encrypted_link
+
+def decrypt_link(encrypted_link, encryption_key):
+    cipher_suite = Fernet(encryption_key)
+    decrypted_link = cipher_suite.decrypt(encrypted_link).decode('utf-8')
+    return decrypted_link
+

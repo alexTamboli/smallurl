@@ -15,7 +15,7 @@
         <tbody>
             {% for log in logs %}
                 <tr>
-                    <td><a href="{{base_url}}/{{ log.link.short_url_hash }}" target="_blank">{{ log.link.short_url_hash }}</a></td>
+                    <td><a href="{{ log.link.short_url }}" target="_blank">{{ log.link.short_url }}</a></td>
                     <td>{{ log.accessed_at }}</td>
                     <td>{{ log.ip_address }}</td>
                 </tr>

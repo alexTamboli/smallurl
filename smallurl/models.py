@@ -3,6 +3,8 @@ from django.db import models
 class ShortenedLink(models.Model):
     original_link = models.URLField("URL")
     short_url_hash = models.CharField(max_length=10, unique=True)
+    short_url = models.URLField()
+    encrypted_url = models.CharField(max_length=512, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
 class AccessLog(models.Model):

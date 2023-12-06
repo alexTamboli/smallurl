@@ -14,6 +14,9 @@
         </button>
     </div>
 
+    <!-- Display the encrypted URL -->
+    <p class="mt-2">Encrypted URL to share: {{ encrypted_url }}</p>
+
     <!-- Embed the YouTube video using the extracted video ID -->
     {% if youtube_video_id %}
         <div class="embed-responsive embed-responsive-16by9 mb-4">
@@ -25,7 +28,6 @@
 
     <a href="{% url 'index' %}" class="btn btn-primary">Shorten Another Link</a>
 {% endblock %}
-
 
 {% block extra_js %}
     <!-- Clipboard.js initialization script -->
